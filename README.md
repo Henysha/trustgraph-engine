@@ -1,10 +1,19 @@
 # TrustGraph Engine
 
-TrustGraph Engine is an explainable fintech risk, fraud, and reputation platform for community finance products.
+Explainable fintech risk, fraud, and reputation engine for community finance products.
+
+TrustGraph Engine demonstrates how a deterministic rules engine can score transaction risk, explain every decision, generate fraud alerts, and route suspicious activity into a review workflow without relying on opaque machine learning models.
 
 ## Problem Statement
 
-Community finance platforms need to evaluate trust in users, groups, and transactions without relying on opaque machine learning models. TrustGraph Engine demonstrates how a deterministic rules engine can score transaction risk, explain every decision, generate fraud alerts, and route suspicious activity into a review workflow.
+Community finance platforms need to evaluate trust in users, groups, and transactions. Operators need answers that are explainable, auditable, and actionable:
+
+- Is this user risky?
+- Is this group showing warning signs?
+- Should this transaction be approved, reviewed, or blocked?
+- Why did the engine make that recommendation?
+
+TrustGraph Engine answers those questions with transparent scoring rules, human-readable reasons, alerts, and review cases.
 
 ## Core Features
 
@@ -16,15 +25,17 @@ Community finance platforms need to evaluate trust in users, groups, and transac
 - Review case workflow for medium-risk and high-risk transactions.
 - Trust signal and trust graph support for reputation and network risk.
 - React dashboard for users, groups, transactions, alerts, and review cases.
-- Automated backend, API-flow, demo, and browser E2E testing.
+- Automated backend tests, API-flow tests, demo script, and browser E2E testing.
 
 ## Tech Stack
 
-- Backend: Python 3.12, FastAPI, Pydantic, SQLAlchemy 2, Alembic
-- Database: PostgreSQL
-- Frontend: React, TypeScript, Vite, React Router, Axios, Tailwind CSS
-- Testing: Pytest, FastAPI TestClient, Playwright
-- Infrastructure: Docker, Docker Compose
+| Layer | Technologies |
+| --- | --- |
+| Backend | Python 3.12, FastAPI, Pydantic, SQLAlchemy 2, Alembic |
+| Database | PostgreSQL |
+| Frontend | React, TypeScript, Vite, React Router, Axios, Tailwind CSS |
+| Testing | Pytest, FastAPI TestClient, Playwright |
+| Infrastructure | Docker, Docker Compose |
 
 ## Architecture Overview
 
@@ -59,26 +70,26 @@ Every transaction starts at risk score `0`. The engine adds and subtracts determ
 
 Risk levels:
 
-- `0-30`: `LOW`, recommendation `APPROVE`
-- `31-70`: `MEDIUM`, recommendation `REVIEW`
-- `71-100`: `HIGH`, recommendation `BLOCK`
+- `0-30`: `LOW`, recommendation `APPROVE`.
+- `31-70`: `MEDIUM`, recommendation `REVIEW`.
+- `71-100`: `HIGH`, recommendation `BLOCK`.
 
 Example risk factors:
 
-- New account under 30 days
-- Transaction amount greater than 1000
-- Three or more failed transactions
-- Low contribution count on funding requests
-- Reputation score below 50
-- Group default rate above 0.15
-- Negative trust signals
-- High-risk connected users
+- New account under 30 days.
+- Transaction amount greater than 1000.
+- Three or more failed transactions.
+- Low contribution count on funding requests.
+- Reputation score below 50.
+- Group default rate above 0.15.
+- Negative trust signals.
+- High-risk connected users.
 
 Protective factors:
 
-- Five or more successful repayments
-- Ten or more contributions
-- Reputation score of 80 or higher
+- Five or more successful repayments.
+- Ten or more contributions.
+- Reputation score of 80 or higher.
 
 Business rules:
 
@@ -96,16 +107,15 @@ FastAPI docs are available at:
 http://localhost:8000/docs
 ```
 
-Core endpoints:
+Core resources:
 
-- Health: `GET /api/health`
-- Users: `POST /api/users`, `GET /api/users`, `GET /api/users/{id}`, `GET /api/users/{id}/risk`
-- Groups: `POST /api/groups`, `GET /api/groups`, `GET /api/groups/{id}`, `GET /api/groups/{id}/risk`
-- Transactions: `POST /api/transactions`, `GET /api/transactions`, `GET /api/transactions/{id}`, `POST /api/transactions/{id}/score`
-- Trust signals: `POST /api/users/{id}/signals`, `GET /api/users/{id}/signals`
-- Fraud alerts: `GET /api/alerts`, `GET /api/alerts/{id}`, `POST /api/alerts/{id}/resolve`
-- Review cases: `GET /api/review-cases`, `GET /api/review-cases/{id}`, `POST /api/review-cases/{id}/approve`, `POST /api/review-cases/{id}/reject`
-- Trust graph: `POST /api/trust-edges`, `GET /api/users/{id}/network`
+- Users
+- Groups
+- Transactions
+- Trust Signals
+- Fraud Alerts
+- Review Cases
+- Trust Graph Edges
 
 ## Frontend Dashboard Overview
 
@@ -128,23 +138,17 @@ Vite may run on `5173` or `5174`; the backend CORS config supports both.
 
 ## Screenshots
 
-Add screenshots to these paths:
+### Dashboard
+![TrustGraph dashboard](docs/screenshots/dashboard.png)
 
-```text
-docs/screenshots/dashboard.png
-docs/screenshots/users.png
-docs/screenshots/transactions.png
-docs/screenshots/alerts.png
-docs/screenshots/review-cases.png
-```
+### User Risk Profiles
+![User risk profiles](docs/screenshots/users.png)
 
-Suggested Markdown once images are added:
+### Fraud Alerts
+![Fraud alerts](docs/screenshots/alerts.png)
 
-```md
-![Dashboard](docs/screenshots/dashboard.png)
-![Transactions](docs/screenshots/transactions.png)
-![Fraud Alerts](docs/screenshots/alerts.png)
-```
+### Review Cases
+![Review cases](docs/screenshots/review-cases.png)
 
 ## Demo User Flow
 
@@ -175,10 +179,10 @@ docker compose exec backend alembic upgrade head
 
 Service URLs:
 
-- Backend API: http://localhost:8000
-- API docs: http://localhost:8000/docs
-- Frontend: http://localhost:5173 or http://localhost:5174
-- PostgreSQL: localhost:5432
+- Backend API: `http://localhost:8000`
+- API docs: `http://localhost:8000/docs`
+- Frontend: `http://localhost:5173` or `http://localhost:5174`
+- PostgreSQL: `localhost:5432`
 
 ## Run Frontend Locally
 
@@ -200,7 +204,7 @@ alembic upgrade head
 uvicorn app.main:app --reload
 ```
 
-On macOS/Linux, use:
+On macOS/Linux, activate the virtual environment with:
 
 ```bash
 source .venv/bin/activate
@@ -212,14 +216,12 @@ source .venv/bin/activate
 
 The backend includes deterministic scoring tests and full API-flow tests.
 
-Run locally:
-
 ```bash
 cd backend
 pytest
 ```
 
-Run through Docker:
+Docker version:
 
 ```bash
 docker compose run --rm backend pytest
@@ -256,13 +258,6 @@ Run headed:
 ```bash
 cd frontend
 npm run test:e2e:headed
-```
-
-Open Playwright UI mode:
-
-```bash
-cd frontend
-npm run test:e2e:ui
 ```
 
 If Vite is running on `5173` instead of the default E2E URL `5174`:
