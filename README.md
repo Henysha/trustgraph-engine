@@ -100,6 +100,43 @@ Or run the backend test suite through Docker:
 docker compose run --rm backend pytest
 ```
 
+## End-to-End UI Tests
+
+Install Playwright browsers once:
+
+```bash
+cd frontend
+npx playwright install
+```
+
+Start the backend and apply migrations:
+
+```bash
+docker compose up --build
+docker compose exec backend alembic upgrade head
+```
+
+Start the frontend in another terminal:
+
+```bash
+cd frontend
+npm run dev
+```
+
+Run the browser E2E flow. The default frontend URL is `http://localhost:5174`; set `FRONTEND_URL` if Vite is using `5173`.
+
+```bash
+cd frontend
+npm run test:e2e
+```
+
+For `5173`:
+
+```bash
+cd frontend
+$env:FRONTEND_URL="http://localhost:5173"; npm run test:e2e
+```
+
 ## MVP API Surface
 
 - `GET /api/health`

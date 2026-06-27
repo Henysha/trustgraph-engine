@@ -21,6 +21,8 @@ env/
 # Node / React
 frontend/node_modules/
 frontend/dist/
+frontend/test-results/
+frontend/playwright-report/
 
 # Environment files
 .env
