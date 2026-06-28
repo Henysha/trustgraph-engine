@@ -1,5 +1,7 @@
 # TrustGraph Engine
 
+![CI](https://github.com/Henysha/trustgraph-engine/actions/workflows/ci.yml/badge.svg)
+
 Explainable fintech risk, fraud, and reputation engine for community finance products.
 
 TrustGraph Engine demonstrates how a deterministic rules engine can score transaction risk, explain every decision, generate fraud alerts, and route suspicious activity into a review workflow without relying on opaque machine learning models.
