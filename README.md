@@ -15,6 +15,26 @@ Community finance platforms need to evaluate trust in users, groups, and transac
 
 TrustGraph Engine answers those questions with transparent scoring rules, human-readable reasons, alerts, and review cases.
 
+## Screenshots
+
+### Dashboard
+![TrustGraph dashboard](docs/screenshots/dashboard.png)
+
+### User Risk Profiles
+![User risk profiles](docs/screenshots/users.png)
+
+### Transaction Scoring
+![Transaction scoring](docs/screenshots/transactions-score.png)
+
+### Fraud Alerts
+![Fraud alerts](docs/screenshots/alerts.png)
+
+### Review Cases
+![Review cases](docs/screenshots/review-cases.png)
+
+### E2E Test Passing
+![E2E tests passing](docs/screenshots/e2e-passing.png)
+
 ## Core Features
 
 - User and group profile management for community finance platforms.
@@ -136,20 +156,6 @@ http://localhost:8000/api
 
 Vite may run on `5173` or `5174`; the backend CORS config supports both.
 
-## Screenshots
-
-### Dashboard
-![TrustGraph dashboard](docs/screenshots/dashboard.png)
-
-### User Risk Profiles
-![User risk profiles](docs/screenshots/users.png)
-
-### Fraud Alerts
-![Fraud alerts](docs/screenshots/alerts.png)
-
-### Review Cases
-![Review cases](docs/screenshots/review-cases.png)
-
 ## Demo User Flow
 
 1. Create a low-risk user with strong repayment and contribution history.
@@ -259,24 +265,3 @@ Run headed:
 cd frontend
 npm run test:e2e:headed
 ```
-
-If Vite is running on `5173` instead of the default E2E URL `5174`:
-
-```powershell
-cd frontend
-$env:FRONTEND_URL="http://localhost:5173"; npm run test:e2e
-```
-
-## Future Improvements
-
-- Add authentication and role-based access for analysts and admins.
-- Add pagination, filtering, and search for operational tables.
-- Add richer trust graph visualization for connected-risk analysis.
-- Add historical risk trends and portfolio-level risk analytics.
-- Add seed data and one-command demo environment setup.
-- Add CI pipeline with backend tests, frontend build, and Playwright E2E.
-- Add deployment manifests for a cloud environment.
-
-## Portfolio / Resume Bullet
-
-Built TrustGraph Engine, an explainable fintech risk, fraud, and reputation platform using FastAPI, PostgreSQL, SQLAlchemy, Alembic, Docker, React TypeScript, Tailwind CSS, deterministic risk scoring, fraud alerts, review case workflows, Pytest API tests, and Playwright end-to-end browser testing.
